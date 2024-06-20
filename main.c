@@ -61,7 +61,7 @@ int main(void){
 
 	scanf(" %s", file);
 
-	RemoveInvasor(invasor, file);
+	policia(invasor, file);
 
 	free(invasor);
 
