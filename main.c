@@ -19,30 +19,29 @@ void policia(char* invasor, char* file){
 	tam1 = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
 
-	buffer = (char*)malloc(tam1 + 1);
+	buffer = (char*)malloc(tam1 + 2);
 		if(buffer == NULL){
 			printf("Erro na alocação de memória\n");
 			exit(1);
 		}
 
 	fread(buffer, 1, tam1, fp);
-	buffer[tam1] = '\0';
+	buffer[tam1] = '\r';
+    buffer[tam1 + 1] = '\n';
 
 	fclose(fp);
 
 	tam2 = strlen(invasor);
 
-	fp = fopen("gojosaturo.bin", "wb");
-
 	for(int i = 0; i <= tam1; i++){
 		if(strncmp(buffer + i, invasor, tam2) == 0){
 			i += tam2;
 
-			if(buffer[i+1] == ' '){
+			if(buffer[i] == ' '){
 				i++;
 			}
 		}
-		fprintf(fp, "%c", buffer[i]);
+		printf("%c", buffer[i]);
 	}
 
 	free(buffer);
